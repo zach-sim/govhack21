@@ -1,0 +1,2 @@
+class KafkaMessage < ApplicationRecord
+end
