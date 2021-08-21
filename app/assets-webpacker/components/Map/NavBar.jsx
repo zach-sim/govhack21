@@ -27,16 +27,23 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">Australasia Covid Updates</Typography>
+          <Typography variant="h5">Australasia Covid Updates</Typography>
           <Typography
             variant="h6"
             style={{
-              margin: "0 auto",
-              borderBottom: "1px solid",
-              transform: "translateX(-50%)",
+              textAlign: "center",
+              flex: 1,
             }}
           >
-            Locations of Interest
+            <span
+              style={{
+                borderBottom: "1px solid",
+                borderTop: "1px solid",
+                display: "inline-block",
+              }}
+            >
+              Locations of Interest
+            </span>
           </Typography>
         </Toolbar>
       </AppBar>
