@@ -22,10 +22,8 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
       covid_location_of_interests_mappings << mappings
     end
     if covid_contact_locations_raw_data.present?
-      ActiveRecord::Base.transaction do
-        CovidLocationOfInterest.insert_all(covid_location_of_interests_mappings)
-        covid_contact_locations_raw_data.update_all(parsed: true)
-      end
+      CovidLocationOfInterest.insert_all(covid_location_of_interests_mappings)
+      covid_contact_locations_raw_data.update_all(parsed: true)
     end
   end
 end

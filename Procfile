@@ -1,6 +1,11 @@
 # You can run these commands in separate shells
 web: rails s -p $PORT
-release: bin/rails db:migrate
+
+migrate: bin/rails db:migrate
+
+sidekiq: sidekiq
+
+racecar_covid_locs: racecar CovidContactLocationConsumer
 
 # Next line runs a watch process with webpack to compile the changed files.
 # When making frequent changes to client side assets, you will prefer building webpack assets

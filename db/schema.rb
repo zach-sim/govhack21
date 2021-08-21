@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_064134) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2021_08_21_212319) do
 
   create_table "covid_location_of_interests", force: :cascade do |t|
     t.string "site"
@@ -27,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_064134) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "venue"
-    t.boolean "nz_data", default: false
+    t.string "nz_id"
   end
 
   create_table "kafka_messages", force: :cascade do |t|

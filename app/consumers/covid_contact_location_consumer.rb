@@ -16,5 +16,6 @@ class CovidContactLocationConsumer < Racecar::Consumer
       }
     end
     KafkaMessage.insert_all(data)
+    CovidLocationOfInterestSyncJob.enqueue(wait: 10.minutes)
   end
 end
