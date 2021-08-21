@@ -3,6 +3,7 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
 
   def perform(*args)
     covid_contact_locations_raw_data = KafkaMessage.where(parsed: false, topic: "govhack-covid_contact_locations")
+    covid_location_of_interests_mappings = []
     covid_contact_locations_raw_data.find_each do | covid_contact_location |
       formatted_value = JSON.parse(covid_contact_location.value)
       mappings = {
@@ -15,9 +16,16 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
         alert_type: formatted_value["alert_type"],
         latitude: formatted_value["y"],
         longitude: formatted_value["x"],
+        created_at: Time.now,
+        updated_at: Time.now
         }
-      CovidLocationOfInterest.create!(mappings)
-      covid_contact_location.update!(parsed: true)
+      covid_location_of_interests_mappings << mappings
+    end
+    if covid_contact_locations_raw_data.present?
+      ActiveRecord::Base.transaction do
+        CovidLocationOfInterest.insert_all(covid_location_of_interests_mappings)
+        covid_contact_locations_raw_data.update_all(parsed: true)
+      end
     end
   end
 end
