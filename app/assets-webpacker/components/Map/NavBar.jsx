@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const PageTitle = ({ children }) => (
   <Typography
@@ -38,6 +39,11 @@ const NavBar = () => {
   }, [setDrawerOpen]);
   return (
     <>
+      <Route path="/locations-of-interest">
+        <Helmet titleTemplate="%s | Australasia Covid Updates [Govhack 2021]">
+          <title>Locations of Interest</title>
+        </Helmet>
+      </Route>
       <AppBar position="static" style={{ zIndex: 1350, position: "relative" }}>
         <Toolbar>
           <IconButton
@@ -62,6 +68,7 @@ const NavBar = () => {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
         <Toolbar />
         <List>
+          {/* TODO: style active page with selected */}
           <ListItem button selected>
             Locations of Interest
           </ListItem>

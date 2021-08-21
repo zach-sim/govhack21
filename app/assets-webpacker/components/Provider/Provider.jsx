@@ -19,7 +19,7 @@ const providers = {
       </>
     </MuiThemeProvider>
   ),
-  router: ({ children }) => <Router {...{ children }} />,
+  router: ({ children }) => <Router>{children}</Router>,
 };
 
 const Provider = ({ children, ...opts }) => {
