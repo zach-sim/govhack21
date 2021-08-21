@@ -17,11 +17,3 @@ jobs:
         HEROKU_APP_NAME: "guarded-ravine-21780"
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/main:main
-
-
-    - name: Run DB Migration to App deployed on Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP_NAME: "guarded-ravine-21780"
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
-      run: heroku run rake db:migrate  
