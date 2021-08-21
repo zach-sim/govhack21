@@ -5,12 +5,15 @@
 
 import Rails from "@rails/ujs";
 import ReactOnRails from "react-on-rails";
+import loadable from "@loadable/component";
 import "../application.scss";
-import HelloWorld from "../components/HelloWorld";
 
 Rails.start();
 
-// This is how react_on_rails can see the HelloWorld in the browser.
+const HelloWorld = loadable(() =>
+  import(/* webpackChunkName: 'HelloWorld' */ "../components/HelloWorld")
+);
+// This is how react_on_rails can see the components.
 ReactOnRails.register({
   HelloWorld,
 });
