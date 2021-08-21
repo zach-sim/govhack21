@@ -44,3 +44,5 @@ gem "react_on_rails", "= 12.3"
 gem 'mini_racer', platforms: :ruby
 
 gem "racecar", "~> 2.3"
+
+gem "graphql", "~> 1.12"
