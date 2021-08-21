@@ -8,6 +8,7 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
       mappings = {
         site: formatted_value["site"],
         alert_details: formatted_value["alert"],
+        venue: formatted_value["venue"],
         alert_date: formatted_value["date"],
         alert_times: formatted_value["times"],
         status: formatted_value["status"],
