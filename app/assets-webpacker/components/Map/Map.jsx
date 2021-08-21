@@ -1,15 +1,14 @@
-import React from "react";
-import { MapContainer, TileLayer, Rectangle, Marker } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { icon, Marker as LMarker } from "leaflet";
-import imgIcon from "leaflet/dist/images/marker-icon.png";
-import imgIconShadow from "leaflet/dist/images/marker-shadow.png";
+import React, { useMemo } from "react";
+import DeckGL from "@deck.gl/react";
+import { StaticMap } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "mapbox-gl";
+import geoViewport from "@mapbox/geo-viewport";
 
-let DefaultIcon = icon({
-  iconUrl: imgIcon,
-  shadowUrl: imgIconShadow,
-});
-LMarker.prototype.options.icon = DefaultIcon;
+/* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved */
+mapboxgl.workerClass =
+  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+/* eslint-enable import/no-webpack-loader-syntax, import/no-unresolved */
 
 const NZ_BOUNDS = [
   [-46.641235447, 166.509144322],
@@ -24,28 +23,49 @@ const COMBINED_BOUNDS = [
   [AU_BOUNDS[1][0], NZ_BOUNDS[1][1]],
 ];
 
-const Map = () => (
-  <>
-    <MapContainer
-      bounds={COMBINED_BOUNDS}
-      zoomSnap={0.5}
-      style={{ height: "100vh" }}
-    >
-      <TileLayer
-        attribution='<span id="toner-attr">Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.</span>'
-        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.jpg"
-      />
-      {/* Below bounds check is for debug purposes */}
-      {false && (
-        <>
-          <Rectangle bounds={NZ_BOUNDS} />
-          <Rectangle bounds={AU_BOUNDS} />
-          <Marker position={COMBINED_BOUNDS[0]} />
-          <Marker position={COMBINED_BOUNDS[1]} />
-        </>
-      )}
-    </MapContainer>
-  </>
-);
+const computeViewport = () => {
+  return geoViewport.viewport(
+    [
+      COMBINED_BOUNDS[0][1],
+      COMBINED_BOUNDS[0][0],
+      COMBINED_BOUNDS[1][1],
+      COMBINED_BOUNDS[1][0],
+    ],
+    [window.innerWidth, window.innerHeight]
+  );
+};
+
+const layers = [];
+
+const Map = () => {
+  const INITIAL_VIEW_STATE = useMemo(() => {
+    const {
+      center: [lng, lat],
+      zoom,
+    } = computeViewport();
+    return {
+      pitch: 0,
+      bearing: 0,
+      longitude: lng,
+      latitude: lat,
+      zoom: zoom - 0.5,
+    };
+  }, []);
+  return (
+    <>
+      <DeckGL
+        initialViewState={INITIAL_VIEW_STATE}
+        controller={true}
+        layers={layers}
+        width="100vw"
+        height="calc(100vh - 1px)"
+      >
+        <StaticMap
+          mapboxApiAccessToken={`pk.eyJ1Ijoic2lsZW5zIiwiYSI6ImNrMDgzZW5kbjA1bGszbWx0b3o0azk1c3AifQ.kVDvhtKEcpo8JcSJ0LB-XQ`}
+        />
+      </DeckGL>
+    </>
+  );
+};
 
 export default Map;
