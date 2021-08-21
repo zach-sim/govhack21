@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_08_21_064134) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "covid_location_of_interests", force: :cascade do |t|
     t.string "site"
     t.text "alert_details"
