@@ -1,6 +1,7 @@
 # You can run these commands in separate shells
 web: rails s -p $PORT
-release: bin/rails db:migrate
+
+migrate: bin/rails db:migrate
 
 sidekiq: sidekiq
 
