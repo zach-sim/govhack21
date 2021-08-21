@@ -1,5 +1,5 @@
 require 'faraday'
-class - < ApplicationJob
+class NzCovidDataLocationOfInterestSyncJob < ApplicationJob
   queue_as :default
 
   def perform(month_year="august-2021", *args)
