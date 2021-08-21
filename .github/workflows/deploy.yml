@@ -1,0 +1,23 @@
+name: Ruby App Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Deploy App to Heroku
+      env:
+        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+        HEROKU_APP_NAME: "guarded-ravine-21780"
+      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
+    # - name: Run DB migrations on deployed Heroku app
+    #   env:
+    #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
+    #   if: github.ref == 'refs/heads/main' && job.status == 'success'
+    #   run: heroku run -a guarded-ravine-21780 rake db:migrate

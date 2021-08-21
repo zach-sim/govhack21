@@ -9,8 +9,8 @@ module Types
     field :covid_locs, [CovidLocType], null: false,
       description: "Covid locations of interest"
     def covid_locs
-      CovidLocationOfInterest.where(nz_data: false, status: 'active').or(
-        CovidLocationOfInterest.where(nz_data: true)
+      CovidLocationOfInterest.where(nz_id: nil, status: 'active').or(
+        CovidLocationOfInterest.where.not(nz_id: nil)
       ).order(:alert_date)
     end
 

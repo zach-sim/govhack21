@@ -10,11 +10,11 @@ common: &common
 
 development:
   <<: *common
-  group_id: "connect-1-development-#{`hostname`}"
+  group_id: "connect-1-development-#{`hostname`}-001"
 
 test:
   <<: *common
 
 production:
   <<: *common
-  group_id: "connect-1-prod"
+  group_id: "connect-1-prod-#{`hostname`}-001"
