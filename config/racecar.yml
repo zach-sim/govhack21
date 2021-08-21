@@ -10,7 +10,7 @@ common: &common
 
 development:
   <<: *common
-  group_id: "connect-1-development-#{`hostname`}-heroku-01"
+  group_id: "connect-1-development-#{`hostname`}-001"
 
 test:
   <<: *common
