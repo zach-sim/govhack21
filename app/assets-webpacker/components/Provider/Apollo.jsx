@@ -7,8 +7,21 @@ import {
 } from "@apollo/client";
 import { csrfToken } from "@rails/ujs";
 import PropTypes from "prop-types";
+import { createNetworkStatusNotifier } from "react-apollo-network-status";
 
-const link = new HttpLink({
+const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
+
+export const GlobalLoadingIndicator = ({ children }) => {
+  const status = useApolloNetworkStatus();
+
+  if (status.numPendingQueries > 0) {
+    return children;
+  } else {
+    return null;
+  }
+};
+
+const httpLink = new HttpLink({
   uri: "/graphql",
   headers: { "X-CSRF-Token": csrfToken() },
 });
@@ -16,7 +29,7 @@ const link = new HttpLink({
 const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
-  link,
+  link: link.concat(httpLink),
   cache,
 });
 

@@ -1,10 +1,23 @@
 /* eslint-disable react/display-name */
 import React from "react";
 import PropTypes from "prop-types";
-import ApolloProvider from "./Apollo";
+import ApolloProvider, { GlobalLoadingIndicator } from "./Apollo";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+import { CssBaseline, LinearProgress } from "@material-ui/core";
 
 const providers = {
   apollo: ({ children }) => <ApolloProvider {...{ children }} />,
+  mui: ({ children }) => (
+    <MuiThemeProvider>
+      <>
+        <CssBaseline />
+        <GlobalLoadingIndicator>
+          <LinearProgress style={{ marginBottom: -4 }} />
+        </GlobalLoadingIndicator>
+        {children}
+      </>
+    </MuiThemeProvider>
+  ),
 };
 
 const Provider = ({ children, ...opts }) => {
