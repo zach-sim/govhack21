@@ -8,7 +8,6 @@ import {
 import { csrfToken } from "@rails/ujs";
 import PropTypes from "prop-types";
 import { createNetworkStatusNotifier } from "react-apollo-network-status";
-import { relayStylePagination } from "@apollo/client/utilities";
 
 const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
 
@@ -27,15 +26,7 @@ const httpLink = new HttpLink({
   headers: { "X-CSRF-Token": csrfToken() },
 });
 
-const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        covidLocs: relayStylePagination(),
-      },
-    },
-  },
-});
+const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
   link: link.concat(httpLink),

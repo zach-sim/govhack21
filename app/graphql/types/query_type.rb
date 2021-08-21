@@ -8,7 +8,7 @@ module Types
     # They will be entry points for queries on your schema.
 
     # TODO: remove me
-    field :covid_locs, CovidLocType.connection_type, null: false,
+    field :covid_locs, [CovidLocType], null: false,
       description: "Covid locations of interest"
     def covid_locs
       CovidLocationOfInterest.where(nz_data: false, status: 'active').or(

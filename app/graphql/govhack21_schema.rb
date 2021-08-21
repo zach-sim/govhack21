@@ -2,8 +2,6 @@ class Govhack21Schema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
-  default_max_page_size 1000
-
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
     # TODO: Implement this function
