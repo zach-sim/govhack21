@@ -39,5 +39,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "ruby-kafka", "~> 1.3"
-
-gem "react-rails", git: 'https://github.com/reactjs/react-rails.git', ref: 'c8c57bb'

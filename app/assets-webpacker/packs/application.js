@@ -7,7 +7,3 @@ import Rails from "@rails/ujs";
 import "../application.scss";
 
 Rails.start();
-// Support component names relative to this directory:
-var componentRequireContext = require.context("components", true);
-var ReactRailsUJS = require("react_ujs");
-ReactRailsUJS.useContext(componentRequireContext);
