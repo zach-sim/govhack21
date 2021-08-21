@@ -13,7 +13,11 @@ Rails.start();
 const HelloWorld = loadable(() =>
   import(/* webpackChunkName: 'HelloWorld' */ "../components/HelloWorld")
 );
+const Map = loadable(() =>
+  import(/* webpackChunkName: 'Map' */ "../components/Map/Map")
+);
 // This is how react_on_rails can see the components.
 ReactOnRails.register({
   HelloWorld,
+  Map,
 });
