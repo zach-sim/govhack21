@@ -16,7 +16,7 @@ class NzCovidDataLocationOfInterestSyncJob < ApplicationJob
       nz_id = feature["properties"]["id"]
       mappings = {
         site: feature["properties"]["Location"],
-        alert_details: feature["properties"]["Information"],
+        alert_details: feature["properties"]["Advice"],
         venue: feature["properties"]["Event"],
         alert_date: feature["properties"]["Start"].to_date,
         alert_times: event_time_duration,
