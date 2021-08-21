@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_222539) do
+ActiveRecord::Schema.define(version: 2021_08_21_043136) do
+
+  create_table "covid_location_of_interests", force: :cascade do |t|
+    t.string "site"
+    t.text "alert_details"
+    t.date "alert_date"
+    t.text "alert_times"
+    t.string "status"
+    t.string "alert_type"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "kafka_messages", force: :cascade do |t|
     t.text "topic"
@@ -21,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_222539) do
     t.json "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "parsed", default: false
   end
 
 end
