@@ -11,7 +11,9 @@ module Types
     field :covid_locs, [CovidLocType], null: false,
       description: "Covid locations of interest"
     def covid_locs
-      CovidLocationOfInterest.where(status: 'active').all
+      CovidLocationOfInterest.where(nz_data: false, status: 'active').or(
+        CovidLocationOfInterest.where(nz_data: true)
+      )
     end
   end
 end

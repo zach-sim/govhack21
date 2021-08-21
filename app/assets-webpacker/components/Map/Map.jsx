@@ -4,6 +4,8 @@ import "leaflet/dist/leaflet.css";
 import { icon, Marker as LMarker } from "leaflet";
 import imgIcon from "leaflet/dist/images/marker-icon.png";
 import imgIconShadow from "leaflet/dist/images/marker-shadow.png";
+import { withProvider } from "../Provider/Provider";
+import CovidLocs from "./CovidLocs";
 
 let DefaultIcon = icon({
   iconUrl: imgIcon,
@@ -28,13 +30,15 @@ const Map = () => (
   <>
     <MapContainer
       bounds={COMBINED_BOUNDS}
-      zoomSnap={0.5}
+      zoomSnap={0.75}
       style={{ height: "100vh" }}
     >
       <TileLayer
         attribution='<span id="toner-attr">Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.</span>'
-        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.jpg"
+        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+        maxZoom={18}
       />
+      <CovidLocs />
       {/* Below bounds check is for debug purposes */}
       {false && (
         <>
@@ -48,4 +52,4 @@ const Map = () => (
   </>
 );
 
-export default Map;
+export default withProvider(Map);
