@@ -12,7 +12,7 @@ const providers = {
       <>
         <CssBaseline />
         <GlobalLoadingIndicator>
-          <LinearProgress style={{ marginBottom: -4 }} />
+          <LinearProgress style={{ marginBottom: -4, zIndex: 1500 }} />
         </GlobalLoadingIndicator>
         {children}
       </>
