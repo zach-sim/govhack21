@@ -1,6 +1,12 @@
 class ApplicationJob < ActiveJob::Base
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
+  
+  around_perform do |job, block|
+    ActiveRecord::Base.transaction do
+      block.call
+    end
+  end
 
   if Rails.env.production?
     require 'sidekiq/api'
