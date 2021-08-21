@@ -1,6 +1,9 @@
 {
   "name": "govhack21",
   "private": true,
+  "scripts": {
+    "lint": "yarn lint app/assets-webpacker/**/* --ext .jsx --ext .js"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.14.5",
     "@rails/ujs": "^6.0.0",
@@ -15,6 +18,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-react": "^7.24.0",
     "webpack-dev-server": "^3.11.2"
   }
 }

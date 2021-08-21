@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs";
-import '../application.scss';
+import "../application.scss";
 
 Rails.start();
 // Support component names relative to this directory:

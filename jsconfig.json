@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2019", "dom"],
+    "baseUrl": "app/assets-webpacker/"
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    ".git"
+  ]
+}
