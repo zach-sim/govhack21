@@ -21,16 +21,8 @@ module.exports = {
     "react/prop-types": "warn",
     "import/dynamic-import-chunkname": "warn",
     "no-debugger": "warn",
-    "react/no-children-prop": "off",
   },
   settings: {
     react: { version: "detect" },
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
   },
 };

@@ -6,20 +6,12 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
-    field :covid_locs, [CovidLocType], null: false,
-      description: "Covid locations of interest"
-    def covid_locs
-      CovidLocationOfInterest.where(nz_data: false, status: 'active').or(
-        CovidLocationOfInterest.where(nz_data: true)
-      ).order(:alert_date)
-    end
 
-    field :covid_loc, CovidLocType, null: false,
-    description: 'Get a specific covid location of interest'  do
-      argument :id, ID, required: true
-    end
-    def covid_loc(id:)
-      CovidLocationOfInterest.find(id)
+    # TODO: remove me
+    field :test_field, String, null: false,
+      description: "An example field added by the generator"
+    def test_field
+      "Hello World!"
     end
   end
 end
