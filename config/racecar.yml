@@ -17,4 +17,4 @@ test:
 
 production:
   <<: *common
-  group_id: "connect-1-prod"
+  group_id: "connect-1-prod-#{`hostname`}-001"
