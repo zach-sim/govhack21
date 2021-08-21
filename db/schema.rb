@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_043136) do
+ActiveRecord::Schema.define(version: 2021_08_21_052857) do
 
   create_table "covid_location_of_interests", force: :cascade do |t|
     t.string "site"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_043136) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "venue"
   end
 
   create_table "kafka_messages", force: :cascade do |t|

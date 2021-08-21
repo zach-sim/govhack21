@@ -13,6 +13,7 @@
 #  longitude     :float
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  venue         :string
 #
 class CovidLocationOfInterest < ApplicationRecord
 end
