@@ -1,0 +1,20 @@
+# These config values will be shared by all environments but can be overridden.
+common: &common
+  client_id: "connector-consumer-1-application"
+  brokers:
+    - pkc-4vndj.australia-southeast1.gcp.confluent.cloud:9092
+  security_protocol: :sasl_ssl
+  sasl_mechanism: PLAIN
+  sasl_username: <%= Rails.application.credentials.confluent_api_key! %>
+  sasl_password: <%= Rails.application.credentials.confluent_secret! %>
+
+development:
+  <<: *common
+  group_id: "connect-1-development-#{`hostname`}"
+
+test:
+  <<: *common
+
+production:
+  <<: *common
+  group_id: "connect-1-prod"
