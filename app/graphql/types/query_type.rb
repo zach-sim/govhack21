@@ -6,8 +6,6 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
-
-    # TODO: remove me
     field :covid_locs, [CovidLocType], null: false,
       description: "Covid locations of interest"
     def covid_locs
