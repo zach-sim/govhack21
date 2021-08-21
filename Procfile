@@ -2,6 +2,8 @@
 web: rails s -p $PORT
 release: bin/rails db:migrate
 
+sidekiq: sidekiq
+
 # Next line runs a watch process with webpack to compile the changed files.
 # When making frequent changes to client side assets, you will prefer building webpack assets
 # upon saving rather than when you refresh your browser page.
