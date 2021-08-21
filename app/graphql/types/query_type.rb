@@ -13,5 +13,13 @@ module Types
         CovidLocationOfInterest.where(nz_data: true)
       ).order(:alert_date)
     end
+
+    field :covid_loc, CovidLocType, null: false,
+    description: 'Get a specific covid location of interest'  do
+      argument :id, ID, required: true
+    end
+    def covid_loc(id:)
+      CovidLocationOfInterest.find(id)
+    end
   end
 end
