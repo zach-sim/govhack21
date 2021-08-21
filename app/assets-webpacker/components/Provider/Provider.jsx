@@ -2,14 +2,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ApolloProvider, { GlobalLoadingIndicator } from "./Apollo";
-import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@material-ui/core/styles";
 import { CssBaseline, LinearProgress } from "@material-ui/core";
 import { HashRouter as Router } from "react-router-dom";
+
+const theme = createTheme({});
 
 const providers = {
   apollo: ({ children }) => <ApolloProvider {...{ children }} />,
   mui: ({ children }) => (
-    <MuiThemeProvider>
+    <MuiThemeProvider {...{ theme }}>
       <>
         <CssBaseline />
         <GlobalLoadingIndicator>
