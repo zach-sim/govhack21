@@ -3,7 +3,7 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
 
   def perform(*args)
     covid_contact_locations_raw_data = KafkaMessage.where(parsed: false, topic: "govhack-covid_contact_locations")
-    covid_contact_locations_raw_data.each do | covid_contact_location |
+    covid_contact_locations_raw_data.find_each do | covid_contact_location |
       formatted_value = JSON.parse(covid_contact_location.value)
       mappings = {
         site: formatted_value["site"],
@@ -15,7 +15,7 @@ class CovidLocationOfInterestSyncJob < ApplicationJob
         latitude: formatted_value["y"],
         longitude: formatted_value["x"],
         }
-      CovidLocationOfInterest.create(mappings)
+      CovidLocationOfInterest.create!(mappings)
       covid_contact_location.update!(parsed: true)
     end
   end
