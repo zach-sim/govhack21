@@ -8,6 +8,8 @@ import { withProvider } from "../Provider/Provider";
 import CovidLocs from "./CovidLocs";
 import NavBar from "./NavBar";
 import { useState } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import { LinearProgress } from "@material-ui/core";
 
 let DefaultIcon = icon({
   iconUrl: imgIcon,
@@ -33,6 +35,7 @@ const Map = () => {
 
   return (
     <>
+      {!loaded && <LinearProgress style={{ marginBottom: -4, zIndex: 1500 }} />}
       <NavBar />
       <MapContainer
         bounds={COMBINED_BOUNDS}
@@ -48,11 +51,16 @@ const Map = () => {
           url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
           maxZoom={18}
         />
-        {loaded && (
-          <>
-            <CovidLocs />
-          </>
-        )}
+        <Switch>
+          <Route path="/locations-of-interest">
+            {loaded && (
+              <>
+                <CovidLocs />
+              </>
+            )}
+          </Route>
+          <Route path="/" />
+        </Switch>
         {/* Below bounds check is for debug purposes */}
         {false && (
           <>

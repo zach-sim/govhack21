@@ -9,6 +9,27 @@ import {
   ListItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
+
+const PageTitle = ({ children }) => (
+  <Typography
+    variant="h6"
+    style={{
+      textAlign: "center",
+      flex: 1,
+    }}
+  >
+    <span
+      style={{
+        borderBottom: "1px solid",
+        borderTop: "1px solid",
+        display: "inline-block",
+      }}
+    >
+      {children}
+    </span>
+  </Typography>
+);
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -28,23 +49,14 @@ const NavBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5">Australasia Covid Updates</Typography>
-          <Typography
-            variant="h6"
-            style={{
-              textAlign: "center",
-              flex: 1,
-            }}
-          >
-            <span
-              style={{
-                borderBottom: "1px solid",
-                borderTop: "1px solid",
-                display: "inline-block",
-              }}
-            >
-              Locations of Interest
-            </span>
-          </Typography>
+          <Switch>
+            <Route path="/locations-of-interest">
+              <PageTitle>Locations of Interest</PageTitle>
+            </Route>
+            <Route path="/">
+              <Redirect to="/locations-of-interest" />
+            </Route>
+          </Switch>
         </Toolbar>
       </AppBar>
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
