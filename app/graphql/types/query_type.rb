@@ -11,7 +11,7 @@ module Types
     def covid_locs
       CovidLocationOfInterest.where(nz_data: false, status: 'active').or(
         CovidLocationOfInterest.where(nz_data: true)
-      )
+      ).order(:alert_date)
     end
   end
 end
