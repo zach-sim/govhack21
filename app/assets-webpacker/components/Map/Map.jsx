@@ -5,7 +5,7 @@ import { icon, Marker as LMarker } from "leaflet";
 import imgIcon from "leaflet/dist/images/marker-icon.png";
 import imgIconShadow from "leaflet/dist/images/marker-shadow.png";
 import { withProvider } from "../Provider/Provider";
-import CovidLocs from "./CovidLocs";
+import loadable from "@loadable/component";
 import NavBar from "./NavBar";
 import { useState } from "react";
 import { Switch, Route, Link } from "react-router-dom";
@@ -30,6 +30,12 @@ const COMBINED_BOUNDS = [
   [AU_BOUNDS[1][0], NZ_BOUNDS[1][1]],
 ];
 
+const CovidLocs = loadable(() =>
+  import(/* webpackChunkName: 'CovidLocs' */ "./CovidLocs")
+);
+const CovidTestingSites = loadable(() =>
+  import(/* webpackChunkName: 'CovidTestingSites' */ "./CovidTestingSites")
+);
 const Map = () => {
   const [loaded, setLoaded] = useState(false);
 
@@ -52,13 +58,8 @@ const Map = () => {
           maxZoom={18}
         />
         <Switch>
-          <Route path="/locations-of-interest">
-            {loaded && (
-              <>
-                <CovidLocs />
-              </>
-            )}
-          </Route>
+          <Route path="/locations-of-interest">{loaded && <CovidLocs />}</Route>
+          <Route path="/testing-sites">{loaded && <CovidTestingSites />}</Route>
           <Route path="/" />
         </Switch>
         {/* Below bounds check is for debug purposes */}
