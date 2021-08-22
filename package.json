@@ -13,6 +13,7 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.2",
+    "@yaga/leaflet-cached-tile-layer": "^1.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "graphql": "^15.5.1",
     "leaflet": "^1.7.1",
