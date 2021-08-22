@@ -52,3 +52,5 @@ gem "racecar", "~> 2.3"
 gem "graphql", "~> 1.12"
 
 gem "sidekiq", "~> 6.2", group: :production
+
+gem "faraday_middleware", "~> 1.1"

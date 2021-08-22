@@ -47,7 +47,12 @@ const NavBar = () => {
       </Route>
       <Route path="/testing-sites">
         <Helmet {...{ titleTemplate }}>
-          <title>TestingSites</title>
+          <title>Testing Sites</title>
+        </Helmet>
+      </Route>
+      <Route path="/vaccination-sites">
+        <Helmet {...{ titleTemplate }}>
+          <title>Vaccination Sites</title>
         </Helmet>
       </Route>
       <AppBar position="static" style={{ zIndex: 1350, position: "relative" }}>
@@ -67,6 +72,9 @@ const NavBar = () => {
             </Route>
             <Route path="/testing-sites">
               <PageTitle>Testing Sites</PageTitle>
+            </Route>
+            <Route path="/vaccination-sites">
+              <PageTitle>Vaccination Sites</PageTitle>
             </Route>
             <Route path="/">
               <Redirect to="/locations-of-interest" />
@@ -92,6 +100,14 @@ const NavBar = () => {
             activeClassName="Mui-selected"
           >
             Testing Sites
+          </ListItem>
+          <ListItem
+            button
+            component={NavLink}
+            to="/vaccination-sites"
+            activeClassName="Mui-selected"
+          >
+            Vaccination Sites
           </ListItem>
         </List>
       </Drawer>

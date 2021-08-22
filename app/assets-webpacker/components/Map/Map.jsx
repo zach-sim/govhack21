@@ -37,6 +37,11 @@ const CovidLocs = loadable(() =>
 const CovidTestingSites = loadable(() =>
   import(/* webpackChunkName: 'CovidTestingSites' */ "./CovidTestingSites")
 );
+const CovidVaccinationSites = loadable(() =>
+  import(
+    /* webpackChunkName: 'CovidVaccinationSites' */ "./CovidVaccinationSites"
+  )
+);
 const Map = () => {
   const [loaded, setLoaded] = useState(false);
 
@@ -62,6 +67,9 @@ const Map = () => {
         <Switch>
           <Route path="/locations-of-interest">{loaded && <CovidLocs />}</Route>
           <Route path="/testing-sites">{loaded && <CovidTestingSites />}</Route>
+          <Route path="/vaccination-sites">
+            {loaded && <CovidVaccinationSites />}
+          </Route>
           <Route path="/" />
         </Switch>
         {/* Below bounds check is for debug purposes */}

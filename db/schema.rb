@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_22_000654) do
+ActiveRecord::Schema.define(version: 2021_08_22_015453) do
 
   create_table "covid_location_of_interests", force: :cascade do |t|
     t.string "site"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 2021_08_22_000654) do
   end
 
   create_table "covid_testing_sites", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.text "location"
+    t.integer "loc_id"
+    t.text "name"
+    t.text "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "covid_vaccination_sites", force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
     t.text "location"

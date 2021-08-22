@@ -1,5 +1,5 @@
 module Types
-  class CovidTsType < Types::BaseObject
+  class CovidVsType < Types::BaseObject
     field :id, ID, null: false
     
     field :latitude, Float, null: false
