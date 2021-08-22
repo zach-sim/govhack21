@@ -1,4 +1,5 @@
 require 'faraday'
+require 'csv'
 class NswCovidTestingSitesJob < ApplicationJob
   queue_as :default
 

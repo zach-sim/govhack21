@@ -1,4 +1,5 @@
 require 'faraday'
+require 'csv'
 class VicCovidTestingSitesJob < ApplicationJob
   queue_as :default
 
