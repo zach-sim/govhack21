@@ -24,21 +24,15 @@ const CovidTestingSitePopup = ({ id }) => {
   return (
     <>
       <Typography variant="subtitle2">
-        {loading ? (
-          <Skeleton />
-        ) : (
-          <>
-            {data.covidTestingSite.name}
-            <a
-              href={data.covidTestingSite.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LaunchIcon
-                style={{ fontSize: "small", verticalAlign: "super" }}
-              />
-            </a>
-          </>
+        {loading ? <Skeleton /> : data.covidTestingSite.name}
+        {data?.covidTestingSite?.url && (
+          <a
+            href={data.covidTestingSite.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LaunchIcon style={{ fontSize: "small", verticalAlign: "super" }} />
+          </a>
         )}
       </Typography>
     </>
