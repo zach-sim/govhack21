@@ -50,6 +50,14 @@ const Map = () => {
         style={{ height: "calc(100vh - 64px)" }}
         preferCanvas
       >
+        <TileLayer
+          eventHandlers={{
+            load: () => setLoaded(true),
+          }}
+          attribution='<span id="toner-attr">Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.</span>'
+          url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+          maxZoom={18}
+        />
         <CachedTileLayer onLoad={() => setLoaded(true)} />
         <Switch>
           <Route path="/locations-of-interest">{loaded && <CovidLocs />}</Route>
