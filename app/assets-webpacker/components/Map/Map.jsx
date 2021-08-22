@@ -5,11 +5,12 @@ import { icon, Marker as LMarker } from "leaflet";
 import imgIcon from "leaflet/dist/images/marker-icon.png";
 import imgIconShadow from "leaflet/dist/images/marker-shadow.png";
 import { withProvider } from "../Provider/Provider";
-import CovidLocs from "./CovidLocs";
+import loadable from "@loadable/component";
 import NavBar from "./NavBar";
 import { useState } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import { LinearProgress } from "@material-ui/core";
+import CachedTileLayer from "./CachedTileLayer";
 
 let DefaultIcon = icon({
   iconUrl: imgIcon,
@@ -30,6 +31,12 @@ const COMBINED_BOUNDS = [
   [AU_BOUNDS[1][0], NZ_BOUNDS[1][1]],
 ];
 
+const CovidLocs = loadable(() =>
+  import(/* webpackChunkName: 'CovidLocs' */ "./CovidLocs")
+);
+const CovidTestingSites = loadable(() =>
+  import(/* webpackChunkName: 'CovidTestingSites' */ "./CovidTestingSites")
+);
 const Map = () => {
   const [loaded, setLoaded] = useState(false);
 
@@ -43,22 +50,10 @@ const Map = () => {
         style={{ height: "calc(100vh - 64px)" }}
         preferCanvas
       >
-        <TileLayer
-          eventHandlers={{
-            load: () => setLoaded(true),
-          }}
-          attribution='<span id="toner-attr">Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.</span>'
-          url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
-          maxZoom={18}
-        />
+        <CachedTileLayer onLoad={() => setLoaded(true)} />
         <Switch>
-          <Route path="/locations-of-interest">
-            {loaded && (
-              <>
-                <CovidLocs />
-              </>
-            )}
-          </Route>
+          <Route path="/locations-of-interest">{loaded && <CovidLocs />}</Route>
+          <Route path="/testing-sites">{loaded && <CovidTestingSites />}</Route>
           <Route path="/" />
         </Switch>
         {/* Below bounds check is for debug purposes */}

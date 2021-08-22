@@ -9,7 +9,7 @@ import {
   ListItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Helmet from "react-helmet";
 
 const PageTitle = ({ children }) => (
@@ -32,6 +32,7 @@ const PageTitle = ({ children }) => (
   </Typography>
 );
 
+const titleTemplate = "%s | Australasia Covid Updates [Govhack 2021]";
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = useCallback(() => {
@@ -40,8 +41,13 @@ const NavBar = () => {
   return (
     <>
       <Route path="/locations-of-interest">
-        <Helmet titleTemplate="%s | Australasia Covid Updates [Govhack 2021]">
+        <Helmet {...{ titleTemplate }}>
           <title>Locations of Interest</title>
+        </Helmet>
+      </Route>
+      <Route path="/testing-sites">
+        <Helmet {...{ titleTemplate }}>
+          <title>TestingSites</title>
         </Helmet>
       </Route>
       <AppBar position="static" style={{ zIndex: 1350, position: "relative" }}>
@@ -59,6 +65,9 @@ const NavBar = () => {
             <Route path="/locations-of-interest">
               <PageTitle>Locations of Interest</PageTitle>
             </Route>
+            <Route path="/testing-sites">
+              <PageTitle>Testing Sites</PageTitle>
+            </Route>
             <Route path="/">
               <Redirect to="/locations-of-interest" />
             </Route>
@@ -68,9 +77,21 @@ const NavBar = () => {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
         <Toolbar />
         <List>
-          {/* TODO: style active page with selected */}
-          <ListItem button selected>
+          <ListItem
+            button
+            component={NavLink}
+            to="/locations-of-interest"
+            activeClassName="Mui-selected"
+          >
             Locations of Interest
+          </ListItem>
+          <ListItem
+            button
+            component={NavLink}
+            to="/testing-sites"
+            activeClassName="Mui-selected"
+          >
+            Testing Sites
           </ListItem>
         </List>
       </Drawer>

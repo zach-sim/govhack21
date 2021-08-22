@@ -14,7 +14,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  venue         :string
-#  nz_data       :boolean          default(FALSE)
+#  nz_id         :string
 #
 class CovidLocationOfInterest < ApplicationRecord
 end
